@@ -23,4 +23,4 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Destroy Stacks
-        run: npx cdk destroy --all --force --context branch=${GITHUB_REF##*/}
+        run: npx cdk destroy --all --force --context branch=${{ github.event.ref }}
