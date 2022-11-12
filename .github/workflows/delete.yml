@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          ref: main # branch itself doesn't exist
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
