@@ -1,4 +1,4 @@
-name: Branch Deleted
+name: Branch Deleted - ${{ github.event.ref }}
 on: delete
 jobs:
   delete:
