@@ -8,12 +8,13 @@ jobs:
       run:
         working-directory: ./2-branch-aware-cdk-app
     steps:
-      - name: Checkout repo
+      - name: Checkout Branch
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: Install Node
+        uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - name: Configure AWS creds
+      - name: Configure AWS Creds
         uses: aws-actions/configure-aws-credentials@master
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
@@ -21,5 +22,5 @@ jobs:
           aws-region: 'eu-central-1'
       - name: Install dependencies
         run: npm install
-      - name: Deploy stacks
-        run: npx cdk destroy --all --require-approval never --context branch=${GITHUB_REF##*/}
+      - name: Destroy Stacks
+        run: npx cdk destroy --all --force --context branch=${GITHUB_REF##*/}
