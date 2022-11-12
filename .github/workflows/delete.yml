@@ -1,4 +1,3 @@
-name: Branch Deleted
 run-name: Branch Deleted - ${{ github.event.ref }}
 on: delete
 jobs:
@@ -12,9 +11,9 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v3
       - name: Install Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: 16
       - name: Configure AWS Creds
         uses: aws-actions/configure-aws-credentials@master
         with:
