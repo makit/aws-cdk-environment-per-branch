@@ -9,7 +9,7 @@ This initially started from the example provided by [Serverless Land](https://se
 
 ### System Overview
 
-IMAGE
+![System Overview](diagram.png)
 
 ### Stacks
 The application is broken down into two stacks, which is a Stateless stack and a Stateful stack. This breakdown is a useful pattern to isolate the resources which carry more risk, versus those without. An example of this could be that if the application renames some IDs and the stack needs deleting and recreating, if this happened in a stack with stateful and stateless resources (S3 bucket and a lambda for example) then it could mean losing all the data.
@@ -47,7 +47,7 @@ The first set of changes are in the bin/generate-speech-app.ts file.
 * Cost! This might be an obvious one, but if there are resources which are not scale-to-zero then cost can add up. A full review of the resources should be completed prior to using this model.
 
 ## Deployment Instructions
-If you have CDK installed globally then you can call `cdk` direct, if not you can use `npx cdk` - also see the [Getting started guide](https://tankpit.com/about).
+If you have CDK installed globally then you can call `cdk` direct, if not you can use `npx cdk` - also see the [Getting started guide](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html).
 
 1. Run `npm install` in the application directory.
 2. Deploy with `cdk deploy --all --require-approval never --context branch=BRANCH-999`.
