@@ -3,6 +3,7 @@ import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { StatefulStack } from '../lib/stateful-stack';
 import { StatelessStack } from '../lib/stateless-stack';
+import { NotificationStack } from '../lib/notification-stack';
 
 const TRUNK_BRANCH_NAME = 'main'; // main or master
 
@@ -16,12 +17,18 @@ class GenerateSpeechApp extends cdk.App {
       throw new Error('Branch is required!');
     }
 
-    // Second - Dynamically name the stacks from the name of the branch
+    // Second - Create common stack(s) for Trunk so they are not created across branches
+    if (branch.toLowerCase() === TRUNK_BRANCH_NAME)
+    {
+      new NotificationStack(this, 'CommonNotificationStack');
+    }
+
+    // Third - Dynamically name the stacks from the name of the branch
     const statefulStack = new StatefulStack(
       this,
       `${branch}-GenSpeechStatefulStack`,
       {
-        // Third - Pass in a param to allow full removal of stateful resources if on a feature branch
+        // Fourth - Pass in a param to allow full removal of stateful resources if on a feature branch
         destroyOnRemove: branch.toLowerCase() !== TRUNK_BRANCH_NAME,
       }
     );
