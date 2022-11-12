@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Deploy stacks
-        run: npm cdk deploy --all --require-approval never --context branch=${GITHUB_REF##*/}
+        run: npx cdk deploy --all --require-approval never --context branch=${GITHUB_REF##*/}
