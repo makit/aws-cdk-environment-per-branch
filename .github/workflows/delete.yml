@@ -4,11 +4,12 @@ jobs:
   delete:
     if: github.event.ref_type == 'branch'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./2-branch-aware-cdk-app
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        with:
-          ref: main # branch itself doesn't exist
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
